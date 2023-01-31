@@ -1,0 +1,13 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Core/bin/Debug/netstandard2.1
+/Core/obj/Debug/netstandard2.1
+/Core/obj
+/TasksApp/TasksApp/bin/Debug
+/TasksApp/TasksApp/obj/Debug
+/TasksApp/TasksApp/obj
+/TasksApp/TasksApp.Android/obj
+/TasksApp/TasksApp.iOS/obj
+/TasksApp/TasksApp.Android/bin/Debug
