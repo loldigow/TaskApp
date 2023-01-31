@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:TasksApp.MVVM"
+             x:Name="InicioPage"
+             x:Class="TasksApp.Inicio">
+    <ContentPage.BindingContext>
+        <viewModels:InicioMVVM></viewModels:InicioMVVM>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="160"/>
+                    <RowDefinition Height="1200"/>
+                    <RowDefinition Height="180"/>
+                </Grid.RowDefinitions>
+                <Frame Grid.Row="0">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="220"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" Spacing="0">
+                            <StackLayout HorizontalOptions="StartAndExpand" VerticalOptions="EndAndExpand">
+                                <Label Text="{Binding DescricaoDiaDaSemana}" TextColor="#00008B" FontAttributes="Bold" FontSize="32"></Label>
+                                <Label Text="{Binding DescricaoQuantidadeDeAtividades}"  TextColor="#00008B" FontSize="22"></Label>
+                            </StackLayout>
+                        </StackLayout>
+                        <Frame Grid.Column="2" CornerRadius="30" BackgroundColor="#00008B">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference InicioPage},
+                                Path=BindingContext.AbraDateTimePickerCommand}" 
+                                                  CommandParameter="{Binding Source={x:Reference DatePicker}}"
+                                                  ></TapGestureRecognizer>
+                            </Frame.GestureRecognizers>
+                            <StackLayout Spacing="0" VerticalOptions="CenterAndExpand">
+                                <Label TextColor="White" Text="{Binding DiaDoMes}" HorizontalOptions="CenterAndExpand" FontSize="50" FontAttributes="Bold"></Label>
+                                <Label TextColor="White" Text="{Binding DescricaoMes}" HorizontalOptions="CenterAndExpand" FontSize="15" FontAttributes="Bold"></Label>
+                                <DatePicker x:Name="DatePicker" Date="{Binding DiaAgenda, Mode=TwoWay}" IsVisible="false"></DatePicker>
+                            </StackLayout>
+                        </Frame>
+                    </Grid>
+                </Frame>
+                <Frame Grid.Row="1" Padding="0" >
+                    <ScrollView VerticalOptions="FillAndExpand" BackgroundColor="LightGray">
+                        <StackLayout>
+                            <Label Text="Nenhuma Atividade" IsVisible="{Binding NaoTemNenhumaAtividade}" HorizontalOptions="CenterAndExpand" FontSize="20"></Label>
+                            <ListView
+                                  ItemsSource="{Binding ListaTarefas}" 
+                            RowHeight="80">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <Grid>
+                                                <Grid.GestureRecognizers>
+                                                    <TapGestureRecognizer 
+                        Command="{Binding Source={x:Reference InicioPage},Path=BindingContext.AbraTaskCommand}" 
+                        CommandParameter="{Binding .}" />
+                                                </Grid.GestureRecognizers>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="*"></RowDefinition>
+                                                </Grid.RowDefinitions>
+                                                <Frame Grid.Column="0" Padding="0"  BackgroundColor="{Binding BackGround}">
+                                                    <Image Source="{Binding SourceCheckBox}"  
+                                                       VerticalOptions="CenterAndExpand"
+                                                       HorizontalOptions="CenterAndExpand"></Image>
+                                                </Frame>
+                                                <Frame Grid.Column="1" Padding="0" BackgroundColor="{Binding BackGround}">
+                                                    <StackLayout Spacing="0">
+                                                        <Label  Text="{Binding DescricaoAtividade}" FontAttributes="Bold"  FontSize="Title" TextColor="#00008B" VerticalOptions="Start"></Label>
+                                                        <Label Text="{Binding DataInicioEFimDescricao}" VerticalOptions="End" TextColor="#00008B" FontSize="Subtitle"></Label>
+                                                        <Label Text="{Binding DetalheAtividade}" VerticalOptions="End" FontSize="Subtitle"></Label>
+                                                    </StackLayout>
+                                                </Frame>
+                                            </Grid>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </ScrollView>
+                </Frame>
+                <Frame Grid.Row="2">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="250"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <StackLayout Grid.Column="0" ></StackLayout>
+                        <Button Grid.Column="2" Text="+" 
+                            BackgroundColor="#00008B" 
+                            FontSize="50" 
+                            TextColor="White" 
+                            BorderWidth="30"
+                            CornerRadius="30" 
+                            Command="{Binding AbraTaskButtonCommand}" ></Button>
+                    </Grid>
+                </Frame>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

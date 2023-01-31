@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:mvvm="clr-namespace:TasksApp.MVVM" x:DataType="mvvm:DetalheMVVM"
+             x:Class="TasksApp.DetalheTaskPage"
+             BackgroundColor="Transparent">
+    <ContentPage.Content>
+        <ScrollView>
+
+
+            <StackLayout Margin="20,15,20,20" BackgroundColor="LightGray">
+                <StackLayout Margin="20,50,20,10">
+                    <Label x:Name="Criarlbl" Text="{Binding DescricaoNovaAtividade}" TextColor="#00008B" FontSize="25" FontAttributes="Bold"></Label>
+                </StackLayout>
+                <Frame Margin="15,0,15,0">
+                    <StackLayout>
+                        <Label x:Name="NomeTarefa" Text="Nome Atividade" TextColor="#00008B" FontSize="15" FontAttributes="Bold"></Label>
+                        <Entry Text="{Binding DescricaoTask}" TextColor="#00008B" Placeholder="Digite o nome da atividade">
+
+                        </Entry>
+                        <StackLayout Margin="5,5,5,5">
+                            <Label Text="Horarios" TextColor="#00008B" FontSize="Subtitle"></Label>
+                            <StackLayout Margin="5,5,5,5" Orientation="Vertical">
+                                <StackLayout>
+                                    <DatePicker Date="{Binding DataInicio, Mode=TwoWay}" TextColor="#00008B"></DatePicker>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Label Text="inicio" TextColor="#00008B" VerticalOptions="CenterAndExpand"></Label>
+                                    <TimePicker TextColor="#00008B" Time="{Binding HoraInicio}"></TimePicker>
+                                    <Label Text="Fim" TextColor="#00008B"  VerticalOptions="CenterAndExpand"></Label>
+                                    <TimePicker TextColor="#00008B" Time="{Binding HoraFim}"></TimePicker>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                        <Label Text="Notas da atividade" TextColor="#00008B" FontSize="20" FontAttributes="Bold"></Label>
+                        <Editor Text="{Binding NotasAtividade, Mode=TwoWay}" Placeholder="Descrição mais completa da atividade"></Editor>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                            <Button Text="Fechar" 
+                                BackgroundColor="#00008B" 
+                                TextColor="White"
+                                Command="{Binding ComandoFechar}">
+
+                            </Button>
+                            <Button Text="{Binding TextoBotaoSalvar}"  BackgroundColor="#00008B" TextColor="White"
+                                Command="{Binding ComandoAlterar}"></Button>
+
+                            <Button Text="Excluir"  BackgroundColor="#00008B" TextColor="White"
+                                Command="{Binding ComandoExcluir}"></Button>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
